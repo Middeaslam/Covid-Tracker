@@ -1,1 +1,82 @@
-<p>states works!</p>
+<div class="row" style="margin-top: 2%">
+  <ng-container *ngIf="statesData.length; else elseBlock">
+    <div class="col-12 col-md-4 col-lg-4" *ngFor="let state of statesData">
+      <div class="table-responsive">
+        <table class="table table-bordered">
+          <tr>
+            <td style="height: 70px">State Name</td>
+            <td>
+              <strong>{{ state[0] }}</strong>
+            </td>
+          </tr>
+          <tr>
+            <td>Confirmed</td>
+            <td>
+              <strong>{{ state[1].confirmed }}</strong>
+            </td>
+          </tr>
+          <tr>
+            <td>Active</td>
+            <td>
+              <strong>
+                {{
+                  state[1].confirmed - (state[1].recovered + state[1].deaths)
+                }}</strong
+              >
+            </td>
+          </tr>
+          <tr>
+            <td>Recovered</td>
+            <td>
+              <strong>{{ state[1].recovered }}</strong>
+            </td>
+          </tr>
+          <tr>
+            <td>Death</td>
+            <td>
+              <strong>{{ state[1].deaths }}</strong>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </ng-container>
+  <ng-template #elseBlock>
+    <h2>No data found</h2>
+  </ng-template>
+</div>
+
+<div
+  class="modal fade"
+  id="errorModal"
+  data-backdrop="static"
+  data-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Error</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">{{ errorMessage }}</div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Close
+        </button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">
+          Ok
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { CountriesService } from 'src/app/services/countries/countries.service';
+
+declare var $: any;
 
 @Component({
   selector: 'app-states',
@@ -7,9 +10,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StatesComponent implements OnInit {
 
-  constructor() { }
+  statesData: any = []
+  errorMessage: string = '';
+
+  constructor(private countriesService: CountriesService) { }
 
   ngOnInit(): void {
+    this.countriesService.getStatesData().subscribe(
+      (res: any) => {
+        let tempData = Object.entries(res)
+        this.statesData = tempData.length > 1 ? tempData.slice(1) : []
+        console.log(this.statesData)
+      }, err => {
+        this.errorMessage = err;
+        console.log('Errors: ', + this.errorMessage)
+        $('#errorModal').modal('show');
+      }
+    )
   }
 
 }

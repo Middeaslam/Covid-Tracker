@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { CountriesService } from 'src/app/services/countries/countries.service';
+declare var $: any;
+
 
 @Component({
   selector: 'app-home',
@@ -7,9 +10,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  errorMessage: string = '';
+  countryData: any = null
+
+  constructor(private countriesService: CountriesService) { }
 
   ngOnInit(): void {
+    this.countriesService.getStatesData().subscribe(
+      (res: any) => {
+        this.countryData = res.All
+        console.log(this.countryData)
+      }, err => {
+        this.errorMessage = err;
+        console.log('Errors: ', + this.errorMessage)
+        $('#errorModal').modal('show');
+      }
+    )
   }
-
 }
+

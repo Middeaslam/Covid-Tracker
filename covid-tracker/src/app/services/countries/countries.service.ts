@@ -9,6 +9,7 @@ export class CountriesService {
 
   private getCountriesUrl: string = 'https://covid-api.mmediagroup.fr/v1/cases?country';
   private getVaccineUrl: string = 'https://covid-api.mmediagroup.fr/v1/vaccines';
+  private getStatesUrl: string = 'https://covid-api.mmediagroup.fr/v1/cases'
 
   constructor(private http: HttpClient) { }
 
@@ -20,6 +21,12 @@ export class CountriesService {
 
   getVaccineData(country: string = 'India'): Observable<any> {
     return this.http.get(`${this.getVaccineUrl}?country=${country}`).pipe(
+      catchError(this.handleError)
+    )
+  }
+
+  getStatesData(country: string = 'India'): Observable<any> {
+    return this.http.get(`${this.getStatesUrl}?country=${country}`).pipe(
       catchError(this.handleError)
     )
   }
