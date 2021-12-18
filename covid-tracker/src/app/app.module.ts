@@ -7,8 +7,9 @@ import { SidenavComponent } from './shared/sidenav/sidenav.component';
 import { HeaderComponent } from './shared/header/header.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { HomeComponent } from './screens/home/home.component';
-import { StatesComponent } from './screens/states/states.component';
-import { VaccinesComponent } from './screens/vaccines/vaccines.component';
+
+
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -17,12 +18,11 @@ import { VaccinesComponent } from './screens/vaccines/vaccines.component';
     HeaderComponent,
     FooterComponent,
     HomeComponent,
-    StatesComponent,
-    VaccinesComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

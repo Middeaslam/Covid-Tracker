@@ -1,0 +1,16 @@
+.dropdown-menu {
+  max-height: 250px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.showModal {
+  display: block;
+}
+
+.navbar-brand {
+  float: none;
+  padding: 15px;
+  text-align: center;
+  width: 100%;
+}
