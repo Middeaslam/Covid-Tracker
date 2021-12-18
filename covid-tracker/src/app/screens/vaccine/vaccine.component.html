@@ -1,0 +1,17 @@
+<div class="row" style="margin-top: 2%">
+  <div class="col-sm-12 col-md-8 col-lg-4">
+    <ng-container *ngIf="vaccineData; else elseBlock">
+      <div class="table-responsive">
+        <table class="table table-bordered">
+          <tr *ngFor="let item of tableHeader">
+            <td>{{ item.name }}</td>
+            <td>{{ vaccineData[item.key] }}</td>
+          </tr>
+        </table>
+      </div>
+    </ng-container>
+    <ng-template #elseBlock>
+      <h2>No data found</h2>
+    </ng-template>
+  </div>
+</div>
