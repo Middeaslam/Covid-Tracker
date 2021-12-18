@@ -1,0 +1,79 @@
+<div class="row" style="margin: 2%">
+  <div class="card bg-primary" style="margin-left: 22%">
+    <div class="card-body">
+      Confirmed <strong>{{ countryData.confirmed }}</strong>
+    </div>
+  </div>
+  <div class="card bg-warning">
+    <div class="card-body">
+      Active
+      <strong>{{
+        countryData.confirmed - (countryData.recovered + countryData.deaths)
+      }}</strong>
+    </div>
+  </div>
+  <div class="card bg-success">
+    <div class="card-body">Recovered {{ countryData.recovered }}</div>
+  </div>
+  <div class="card bg-danger">
+    <div class="card-body">Deaths {{ countryData.deaths }}</div>
+  </div>
+</div>
+
+<div class="row justify-content-center" style="margin: 5%">
+  <div class="col-12 col-md-5 col-lg-4">
+    <ng-container *ngIf="countryData; else elseBlock">
+      <div class="table-responsive">
+        <table class="table table-bordered">
+          <tr>
+            <td>Population</td>
+            <td>
+              <strong>{{ countryData.population }}</strong>
+            </td>
+          </tr>
+          <tr>
+            <td>Cases per million</td>
+            <td>
+              <strong>{{
+                (countryData.confirmed / countryData.population) * 1000000
+                  | number: "2.2"
+              }}</strong>
+            </td>
+          </tr>
+          <tr>
+            <td>Active Ratio</td>
+            <td>
+              <strong>{{
+                ((countryData.confirmed -
+                  (countryData.recovered + countryData.deaths)) /
+                  countryData.confirmed) *
+                  100 | number: "2.2"
+              }}</strong>
+            </td>
+          </tr>
+          <tr>
+            <td>Recovery Ratio</td>
+            <td>
+              <strong>{{
+                (countryData.recovered / countryData.confirmed) * 100
+                  | number: "2.2"
+              }}</strong>
+            </td>
+          </tr>
+          <tr>
+            <td>Death Ratio</td>
+            <td>
+              <strong>{{
+                (countryData.deaths / countryData.confirmed) * 100
+                  | number: "2.2"
+              }}</strong>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </ng-container>
+    <ng-template #elseBlock>
+      <h2>No data found</h2>
+    </ng-template>
+  </div>
+</div>
