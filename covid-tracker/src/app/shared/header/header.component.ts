@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Country } from 'src/app/models/CountriesData.interface';
 import { CountriesService } from 'src/app/services/countries/countries.service';
 
 declare var $: any;
@@ -19,8 +20,9 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.countriesService.getCountriesData().subscribe(
-      (res: any) => {
+      (res: Country) => {
         this.countries = Object.keys(res)
+        console.log(this.countries, 'countries')
       }, err => {
         this.errorMessage = err;
         console.log('Errors: ', + this.errorMessage)
@@ -31,6 +33,7 @@ export class HeaderComponent implements OnInit {
 
   selectCountry(country: string) {
     this.selectedCountry = country
+    this.countriesService.setCountry(country)
   }
 
 }
