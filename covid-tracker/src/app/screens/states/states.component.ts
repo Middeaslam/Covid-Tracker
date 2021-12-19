@@ -12,7 +12,7 @@ declare var $: any;
 })
 export class StatesComponent implements OnInit {
 
-  statesData: any
+  statesData: any = null
   errorMessage: string = '';
 
   subscription!: Subscription
@@ -26,7 +26,7 @@ export class StatesComponent implements OnInit {
         this.countriesService.getStatesData(data).subscribe(
           (res: StatesData) => {
             let tempData = Object.entries(res)
-            this.statesData = tempData.length > 1 ? tempData.slice(1) : []
+            this.statesData = tempData.length > 1 ? tempData.slice(1) : null
             $('#loadingmodal').modal('hide');
           }, err => {
             this.errorMessage = err;
