@@ -24,6 +24,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.subscription = this.countriesService.getCountry().subscribe(
       (data: string) => {
+        $('#loadingmodal').modal('show');
         this.countriesService.getStatesData(data).subscribe(
           (res: StatesData) => {
             const tempData = res.All
@@ -34,6 +35,7 @@ export class HomeComponent implements OnInit {
               deaths: tempData.deaths,
               population: tempData.population
             }
+            $('#loadingmodal').modal('hide');
           }, err => {
             this.errorMessage = err;
             console.log('Errors: ', + this.errorMessage)

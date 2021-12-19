@@ -23,10 +23,11 @@ export class VaccineComponent implements OnInit {
   ngOnInit(): void {
     this.subscription = this.countriesService.getCountry().subscribe(
       (data: string) => {
+        $('#loadingmodal').modal('show');
         this.countriesService.getVaccineData(data).subscribe(
           (res: Vaccinesdata) => {
             this.vaccineData = res.All
-            console.log(this.vaccineData)
+            $('#loadingmodal').modal('hide');
           }, err => {
             this.errorMessage = err;
             console.log('Errors: ', + this.errorMessage)

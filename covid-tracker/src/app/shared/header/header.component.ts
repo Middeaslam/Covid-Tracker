@@ -19,10 +19,11 @@ export class HeaderComponent implements OnInit {
   constructor(private countriesService: CountriesService) { }
 
   ngOnInit(): void {
+    $('#loadingmodal').modal('show');
     this.countriesService.getCountriesData().subscribe(
       (res: Country) => {
-        this.countries = Object.keys(res)
-        console.log(this.countries, 'countries')
+        this.countries = Object.keys(res);
+        $('#loadingmodal').modal('hide');
       }, err => {
         this.errorMessage = err;
         console.log('Errors: ', + this.errorMessage)

@@ -22,10 +22,12 @@ export class StatesComponent implements OnInit {
   ngOnInit(): void {
     this.subscription = this.countriesService.getCountry().subscribe(
       (data: string) => {
+        $('#loadingmodal').modal('show');
         this.countriesService.getStatesData(data).subscribe(
           (res: StatesData) => {
             let tempData = Object.entries(res)
             this.statesData = tempData.length > 1 ? tempData.slice(1) : []
+            $('#loadingmodal').modal('hide');
           }, err => {
             this.errorMessage = err;
             console.log('Errors: ', + this.errorMessage)
