@@ -30,8 +30,11 @@ export class VaccineComponent implements OnInit {
             $('#loadingmodal').modal('hide');
           }, err => {
             this.errorMessage = err;
-            console.log('Errors: ', + this.errorMessage)
+            console.log('Errors: ', + this.errorMessage);
+            $('#loadingmodal').modal('hide');
             $('#errorModal').modal('show');
+          }, () => {
+            $('#loadingmodal').modal('hide');
           }
         )
       }, err => {
